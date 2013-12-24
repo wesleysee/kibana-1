@@ -6,13 +6,13 @@ module.exports = function(grunt) {
     'clean:on_start',
     'less:dist',
     'copy:everything_but_less_to_temp',
-    'htmlmin:build',
+    //'htmlmin:build',
     'cssmin:build',
     'ngmin:build',
     'requirejs:build',
     'clean:temp',
-    'build:write_revision',
-    'uglify:dest'
+    'build:write_revision'//,
+    //'uglify:dest'
   ]);
 
   // run a string replacement on the require config, using the latest revision number as the cache buster
