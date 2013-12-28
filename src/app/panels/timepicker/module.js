@@ -210,7 +210,7 @@ function (angular, app, _, moment, kbn) {
       date = moment(date).clone().toDate();
       // Hoiio hack: all dates are GMT+8, including elastic search. no need to do offset.
       //return moment(new Date(date.getTime() + date.getTimezoneOffset() * 60000)).toDate();           
-      return moment(new Date(date.getTime()).toDate();
+      return moment(new Date(date.getTime())).toDate();
     };
 
 
