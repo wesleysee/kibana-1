@@ -78,8 +78,9 @@ function (angular, app, _, moment, kbn) {
       $scope.temptime = cloneTime($scope.time);
 
       // Date picker needs the date to be at the start of the day
-      $scope.temptime.from.date.setHours(0,0,0,0);
-      $scope.temptime.to.date.setHours(0,0,0,0);
+      // Hoiio hack: set hours to 8 for GMT+8, otherwise date will be wrong
+      $scope.temptime.from.date.setHours(8,0,0,0);
+      $scope.temptime.to.date.setHours(8,0,0,0);
 
       $q.when(customTimeModal).then(function(modalEl) {
         modalEl.modal('show');
@@ -207,7 +208,9 @@ function (angular, app, _, moment, kbn) {
     // Do not use the results of this function unless you plan to use setHour/Minutes/etc on the result
     var datepickerToLocal = function(date) {
       date = moment(date).clone().toDate();
-      return moment(new Date(date.getTime() + date.getTimezoneOffset() * 60000)).toDate();
+      // Hoiio hack: all dates are GMT+8, including elastic search. no need to do offset.
+      //return moment(new Date(date.getTime() + date.getTimezoneOffset() * 60000)).toDate();           
+      return moment(new Date(date.getTime()).toDate();
     };
 
 

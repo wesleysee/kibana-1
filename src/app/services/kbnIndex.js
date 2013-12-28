@@ -61,7 +61,9 @@ function (angular, _, config, moment) {
     // Update2: More death.
     function fake_utc(date) {
       date = moment(date).clone().toDate();
-      return moment(new Date(date.getTime() + date.getTimezoneOffset() * 60000));
+      // Hoiio hack: all dates are GMT+8, including elastic search. no need to do offset.
+      //return moment(new Date(date.getTime() + date.getTimezoneOffset() * 60000));
+      return moment(new Date(date.getTime()));
     }
 
     // Create an array of date objects by a given interval
